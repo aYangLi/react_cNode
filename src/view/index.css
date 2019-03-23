@@ -1,0 +1,117 @@
+.pageWrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#logo {
+  color: #ffffff;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.headerDivider {
+  height: 44px;
+  margin: 10px 0;
+  float: left;
+}
+
+#nav {
+  float: left;
+  background: none;
+  border: none;
+  line-height: 62px;
+  margin-left: 20px;
+}
+
+#nav a {
+  color: #ffffff;
+}
+
+#nav .ant-menu-item-selected a {
+  color: #1890FF;
+}
+
+.xsNav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.main {
+  flex: 1;
+}
+
+.main .wrap {
+  border: 1px solid #ccc;
+  border-top: none;
+  overflow: hidden; 
+}
+
+.indexSider{
+  border-right: 1px solid #ccc;
+  padding-bottom: 9999px;
+  margin-bottom: -9999px
+}
+
+#indexMenu {
+  border-right: none;
+}
+
+#indexMenu li {
+  margin-right: -1px;
+  transition: 0.5s;
+  text-align: center;
+  border-right: 3px solid rgba(0, 0, 0, 0);
+}
+
+#indexMenu li:hover,
+#indexMenu .ant-menu-item-selected {
+  color: #1890FF;
+  background: #e6f7ff;
+  border-right-color: #1890FF;
+}
+
+#indexXsMenu {
+  display: flex;
+} 
+
+#indexXsMenu  li{
+  flex: 1;
+  float: none;
+  text-align: center;
+} 
+
+.indexList {
+  height:'500px';
+  border-left: 1px solid #ccc;
+  padding: 0 10px;
+}
+.indexList p {
+  margin: 0 ;
+}
+
+@media all and (max-width:767px) {
+  #indexMenu {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #indexMenu li {
+    margin: 0 0 -1px 0;
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0);
+  }
+
+  #indexMenu li:hover,
+  #indexMenu .ant-menu-item-selected {
+    background: none;
+    border-bottom-color: #1890FF;
+  }
+}
