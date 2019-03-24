@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
+import data from './data';
+import PublicCard from '../public-card';
 
 class Book extends Component {
   render(h) {
-    return '教程'
+    return (<PublicCard
+      data={data}
+    />)
   }
 }
 
