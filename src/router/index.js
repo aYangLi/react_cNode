@@ -17,7 +17,7 @@ class RouterIndex extends Component {
          <Route path='/index/:id' component={Index}/> 
          <Route path='/book' component={Book}/> 
          <Route path='/about' component={About}/> 
-         <Route path='/details' component={Details}/> 
+         <Route path='/details/:id' component={Details}/> 
          <Route path='/user' component={User}/> 
        </Switch>
      );
