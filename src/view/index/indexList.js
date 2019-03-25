@@ -7,7 +7,6 @@ import TxtTag from '../txtTag';
 class IndexList extends Component {
   constructor (arg) {
     super(arg);
-    let {tab} = this.props
     this.state = {
       page:1,
     }

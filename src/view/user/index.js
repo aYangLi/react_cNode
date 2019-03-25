@@ -13,13 +13,13 @@ class User extends Component {
       />
       <Row className='userInfo'>
         <Col md={8}>
-          用户名：<a>{loginname}</a>
+          用户名：<a href="#/">{loginname}</a>
         </Col>
         <Col md={8}>
-          积分：<a>{score}</a>
+          积分：<a href="#/">{score}</a>
         </Col>
         <Col md={8}>
-          注册时间：<a>{create_at.split('T')[0]}</a>
+          注册时间：<a href='#/'>{create_at.split('T')[0]}</a>
         </Col>
       </Row>
       <UserList
