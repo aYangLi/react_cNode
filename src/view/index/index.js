@@ -5,7 +5,8 @@ import IndexList from './indexList';
 
 class Index extends Component {
   render(h) {
-    console.log(this.props); 
+    console.log(this.props.match.params.id); 
+    let tab = this.props.match.params.id;
     return (
       <Row className='wrap'>
         <Col md={6} xs={0} className='indexSider'>
@@ -24,7 +25,9 @@ class Index extends Component {
           md={18}
           xs={24}
           className='indexList'>
-          <IndexList/>
+          <IndexList
+            tab ={tab}
+          />
         </Col>
       </Row>
     )
