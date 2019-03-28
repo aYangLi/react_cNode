@@ -7,17 +7,17 @@ function list (state={
       return {
         loading:false,
         data: action.data.data,
-      }
+      };
     case "LIST_UPDATA_REEOR":
       return {
         loading:false,
         data:[],
-      }
+      };
     case "LIST_UPDATA":
       return {
         loading:true,
         data: state.data,
-      }
+      };
     default :
      return state;
   }

@@ -1,11 +1,47 @@
 import React, {Component} from 'react';
 import { Avatar ,Row, Col} from 'antd';
-import data from './data';
 import UserList from './userList';
+import {connect} from "react-redux";
+import axios from "axios";
 
 class User extends Component {
-  render(h) {
-    let {avatar_url,create_at,score,loginname,recent_topics, recent_replies} = data.data
+  constructor(props) {
+    super(props);
+    let id = this.props.match.params.id;
+    this.getData(id);
+  }
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    let id = this.props.match.params.id;
+    let nextId = nextProps.match.params.id;
+    if (id !== nextId) {
+      this.getData(nextId);
+      return false;
+    }
+    return true;
+  }
+
+  getData (id) {
+    this.props.dispatch( (dispatch) => {
+      dispatch({
+        type:'USER_UPDATA'
+      });
+      axios.get(`https://cnodejs.org/api/v1/user/${id}`)
+      .then( (res) => {
+        dispatch({
+          type: 'USER_UPDATA_SUCC',
+          data: res.data,
+        });
+      })
+      .catch( (error) => {
+        dispatch({
+          type:'USER_UPDATA_ERROR',
+        });
+      })
+    })
+  }
+  render() {
+    let {data,loading} = this.props;
+    let {avatar_url,create_at,score,loginname,recent_topics, recent_replies, } = data;
     return (<div className="wrap">
       <Avatar 
         src={avatar_url}
@@ -23,12 +59,12 @@ class User extends Component {
         </Col>
       </Row>
       <UserList
-        loadding={false}
+        loadding={loading}
         title= '最近创建的话题'
         data = {recent_topics}
       />
       <UserList
-        loadding={false}
+        loadding={loading}
         title= '最近回复的话题'
         data = {recent_replies}
       />
@@ -36,4 +72,4 @@ class User extends Component {
   }
 }
 
-export default User; 
+export default connect(state => (state.user))(User);
