@@ -7,24 +7,31 @@ import TxtTag from '../txtTag';
 class IndexList extends Component {
   constructor (arg) {
     super(arg);
+    this.isStart  =true;
     this.state = {
       page:1,
-    }
-    this.getData(this.props.tab);
+    };
+    this.getData(this.props.tab,this.state.page);
   }
-  shouldComponentUpdate (nextProps) {
+  shouldComponentUpdate (nextProps,nextState) {
+    this.isStart =false;
+    if (this.state.page !== nextState.page) {
+      this.getData(nextProps.tab,nextState.page);
+      return false;
+    }
     if (this.props.tab !== nextProps.tab) {
-      this.getData(nextProps.tab);
+      this.state.page = 1;
+      this.getData(nextProps.tab,1);
       return false;
     }
     return true;
   }
-  getData (tab) {
+  getData (tab,page) {
     this.props.dispatch((dispatch) => {
       dispatch({
         type:'LIST_UPDATA',
-      })
-      axios.get(`https://cnodejs.org/api/v1/topics?tab=${tab}&page=${this.state.page}&limit=15`)
+      });
+      axios.get(`https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=10`)
       .then( (res) => {
         console.log(res);
         dispatch({
@@ -44,9 +51,21 @@ class IndexList extends Component {
   render () {
     console.log(this.props);
     let {loading,data} = this.props;
+    let pagination = {
+      current:this.state.page,
+      pageSize:10,
+      total:1000,
+      onChange : ( current => {
+        console.log(current);
+        this.setState({
+          page:current,
+        })
+      })
+    };
     return <List
       loading = {loading}
       dataSource = {data}
+      pagination={this.isStart ?false:pagination}
       renderItem = { item => (<List.Item
         actions={['回复：' + item.reply_count,'访问' + item.visit_count]}
         key={item.id}
